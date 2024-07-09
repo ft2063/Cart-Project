@@ -41,33 +41,44 @@ export const useCartStore = defineStore ( 'cart', {
             },
 
         ],
-        cartItems: []
+        cartItems: [],
+       
     }),
     getters: {
         countCartItems(state){
             return state.cartItems.length
-        }
+        },
+       subtotal(state){
+        this.cartItems.forEach(item => {
+            item.subtotal = item.price * item.quantity 
+          });
+       },
+
+        total(state) {
+            return state.cartItems.reduce((acc, item) => acc + item.subtotal, 0);
+          }
        
     },
     actions: {
         addToCart(item) {
-            let index = this.cartItems.findIndex(product => product.id === item.id)
-            if (index !== -1){
-                this.cartItems[index].quantity +=1;
+            let index = this.cartItems.findIndex(product => product.id === item.id);
+            if (index !== -1) {
+                let updatedItem = { ...this.cartItems[index] }; // Create a copy
+                updatedItem.quantity += 1;
+                this.cartItems.splice(index, 1, updatedItem); // Replace item at index
                 toast.success("Item was updated!", {
                     timeout: 2000
                 });
+            } else {
+                // If item does not exist, add to cart
+                item.quantity = 1;
+                this.cartItems.push(item);
+                toast.success("Item was added to cart!", {
+                    timeout: 2000
+                });
             }
-                else{
-                    item.quantity = 1;
-                    this.cartItems.push(item);
-                    toast.success("Item was added to cart!", {
-                        timeout: 2000
-                    });
-                }
-
-            
         },
+        
 
         incrementQ(item) {
             let index = this.cartItems.findIndex(product => product.id === item.id)
@@ -99,7 +110,15 @@ export const useCartStore = defineStore ( 'cart', {
             toast.success("Item was removed", {
                 timeout: 2000
             });
-        }
+        },
+        applyDiscount(discountPercentage) {
+            const discountFactor = 1 - discountPercentage / 100;
+            this.cartItems.forEach(item => {
+              item.subtotal = item.price * item.quantity * discountFactor;
+              console.log(item.subtotal)
+            });
+          },
+        
 
 
         
