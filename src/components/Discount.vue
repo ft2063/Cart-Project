@@ -6,7 +6,7 @@
       <input type="text" class="form-control" id="discountCode" v-model="discountCode">
       <button class="btn btn-outline-primary" type="button" @click="applyDiscount">Apply</button>
     </div>
-    <small v-if="invalidCode" class="text-danger">Invalid discount code</small>
+    
   </div>
 </template>
 
@@ -36,6 +36,7 @@
       console.log(`Item ${item.id} subtotal after discount:`, item.subtotal);
       invalidCode.value = false;
     } else {
+    toast.error('Invalid code!', { timeout: 2000 });
       invalidCode.value = true;
     }
   };
