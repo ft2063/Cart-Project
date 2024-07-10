@@ -1,4 +1,3 @@
-<!-- Cart.vue -->
 <template>
   <div class="row my-4">
     <div v-if="data.cartItems.length > 0" class="col-md-12">
@@ -11,8 +10,10 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Quantity</th>
-                <th>Price</th>
-                <th>Subtotal</th>
+                <!-- Price column only visible on tablets and larger -->
+                <th class="d-none d-md-table-cell">Price</th>
+                <!-- Subtotal column only visible on tablets and larger -->
+                <th class="d-none d-md-table-cell">Subtotal</th>
                 <th></th>
               </tr>
             </thead>
@@ -23,13 +24,15 @@
                   <img :src="item.image" width="60" height="60" alt="" class="img-fluid rounded">
                 </td>
                 <td>{{ item.name }}</td>
-                <td>
+                <td class="quantity-cell">
                   <i class="bi bi-caret-up" @click="data.incrementQ(item)"></i>
                   {{ item.quantity }}
                   <i class="bi bi-caret-down" @click="data.decrementQ(item)"></i>
                 </td>
-                <td>{{ item.price }}</td>
-                <td>{{ item.subtotal }}</td>
+                <!-- Price column only visible on tablets and larger -->
+                <td class="d-none d-md-table-cell">{{ item.price }}</td>
+                <!-- Subtotal column only visible on tablets and larger -->
+                <td class="d-none d-md-table-cell">{{ item.subtotal }}</td>
                 <td>
                   <i @click="data.removeFromCart(item)" class="bi bi-cart-x text-danger fw-bo"></i>
                 </td>
@@ -68,11 +71,9 @@
   import Discount from './Discount.vue';
 
   const data = useCartStore();
-  console.log('Current subtotal:', data.subtotal);
-
 </script>
 
-<style>
+<style scoped>
   i {
     cursor: pointer;
   }
@@ -87,5 +88,23 @@
   .empty-cart-card img {
     max-width: 200px;
     margin-top: 20px;
+  }
+
+  /* Adjustments for mobile */
+  @media (max-width: 768px) {
+    .table-responsive {
+      overflow-x: auto;
+    }
+    .quantity-cell {
+      font-size: 0.9rem;
+    }
+    .img-fluid {
+      max-width: 40px;
+      max-height: 40px;
+    }
+    /* Hide Price and Subtotal columns on mobile */
+    .d-md-table-cell {
+      display: none;
+    }
   }
 </style>
