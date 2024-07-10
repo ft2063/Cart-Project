@@ -1,4 +1,3 @@
-<!-- Discount.vue -->
 <template>
   <div class="mb-3">
     <label for="discountCode" class="form-label">Discount Code</label>
@@ -29,14 +28,13 @@
 
     const validCode = discountCodes.find(code => code.code === discountCode.value);
 
-     if (validCode) {
+    if (validCode) {
       console.log('Discount code applied:', validCode);
       toast.success('Discount applied!', { timeout: 2000 });
-      data.applyDiscount(validCode.discount);
-      console.log(`Item ${item.id} subtotal after discount:`, item.subtotal);
+      data.applyDiscount(validCode.discount); // Trigger the applyDiscount action in useCartStore
       invalidCode.value = false;
     } else {
-    toast.error('Invalid code!', { timeout: 2000 });
+      toast.error('Invalid code!', { timeout: 2000 });
       invalidCode.value = true;
     }
   };
