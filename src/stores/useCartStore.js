@@ -1,3 +1,4 @@
+// stores/useCartStore.js
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import { useToast } from "vue-toastification";
@@ -9,6 +10,7 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     products: products,
     cartItems: useLocalStorage('cartItems', []), // Use local storage for cart items
+    isDarkMode: useLocalStorage('isDarkMode', false), // Use local storage for theme
   }),
   getters: {
     countCartItems(state) {
@@ -82,5 +84,8 @@ export const useCartStore = defineStore('cart', {
         console.log(item.subtotal);
       });
     },
+    toggleTheme() {
+      this.isDarkMode = !this.isDarkMode;
+    }
   },
 });

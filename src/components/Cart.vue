@@ -1,42 +1,43 @@
 <template>
   <div class="row my-4">
     <div v-if="data.cartItems.length > 0" class="col-md-12">
-      <div class="card">
+      <div :class="['card', data.isDarkMode ? 'card-black' : '']">
         <div class="card-body">
-          <div v-for="item in data.cartItems" :key="item.id" class="cart-item mb-3">
-            <div class="cart-item-left">
+          <div v-for="item in data.cartItems" :key="item.id" :class="['cart-item', data.isDarkMode ? 'cart-item-black' : '']">
+            <div :class="['cart-item-left', data.isDarkMode ? 'cart-item-left-black' : '']">
               <img :src="item.image" width="60" height="60" alt="" class="img-fluid rounded cart-item-image">
             </div>
-            <div class="cart-item-right w-100">
+            <div :class="['cart-item-right w-100', data.isDarkMode ? 'cart-item-right-black' : '']">
               <div class="d-flex align-items-center justify-content-between">
-                <div class="item-name">
-                  <h5 class="card-title mb-0">{{ item.name }}</h5>
+                <div :class="['item-name', data.isDarkMode ? 'item-name-black' : '']">
+                  <h5 :class="['card-title mb-0', data.isDarkMode ? 'card-title-black' : '']">{{ item.name }}</h5>
                 </div>
                 <div class="d-flex align-items-center ml-auto">
-                  <span class="quantity-controls me-3">
+                  <span :class="['quantity-controls me-3', data.isDarkMode ? 'quantity-controls-black' : '']">
                     <i class="bi bi-caret-up" @click="data.incrementQ(item)"></i>
                     <span class="quantity">{{ item.quantity }}</span>
                     <i class="bi bi-caret-down" @click="data.decrementQ(item)"></i>
                   </span>
-                  <span class="badge  rounded-pill price-badge me-3">
+                  <!-- Show price and price badge on all screens -->
+                  <span :class="['badge rounded-pill price-badge me-3', data.isDarkMode ? 'price-badge-black' : '']">
                     ${{ item.price }}
                   </span>
-                  <span class="subtotal-badge me-3">
+                  <span :class="['subtotal-badge me-3', data.isDarkMode ? 'subtotal-badge-black' : '', isMobile ? 'd-none' : '']">
                     Subtotal: ${{ item.subtotal }}
                   </span>
-                  <i @click="data.removeFromCart(item)" class="bi bi-cart-x text-danger fw-bold remove-icon"></i>
+                  <i @click="data.removeFromCart(item)" :class="['bi bi-cart-x text-danger fw-bold remove-icon', data.isDarkMode ? 'remove-icon-black' : '']"></i>
                 </div>
               </div>
             </div>
           </div>
-          <div v-if="data.cartItems.length > 0" class="text-end total-text mt-4">
+          <div v-if="data.cartItems.length > 0" :class="['text-end total-text mt-4', data.isDarkMode ? 'total-text-black' : '']">
             <discount></discount>
             <h5>Total: ${{ data.total }}</h5>
           </div>
         </div>
       </div>
     </div>
-    <div v-else class="card text-center p-5 empty-cart-card">
+    <div v-else :class="['card text-center p-5 empty-cart-card', data.isDarkMode ? 'empty-cart-card-black' : '']">
       <div class="card-body">
         <h5 class="card-title">Your Cart is Empty!</h5>
         <p class="card-text mb-4">
@@ -46,8 +47,6 @@
     </div>
   </div>
 </template>
-
-
 <script setup>
   import { useCartStore } from '../stores/useCartStore';
   import Discount from './Discount.vue';
@@ -247,6 +246,7 @@
   }
 
   .price-badge-black {
+    border: none;
     background-color: #BB86FC; /* Purple color for price badge */
     color: #383838; /* Text color on price badge */
     margin-right: 10px; /* Adjust spacing as needed */
@@ -295,8 +295,21 @@
     }
 
     .item-name-black {
-      width: 100%; /* Full width for item name on mobile */
-      margin-bottom: 5px; /* Adjust spacing as needed */
+      width: 100%; 
+      margin-bottom: 5px; 
+    }
+
+    @media (max-width: 768px) {
+    .cart-item-right {
+      margin-left: 0; /* Remove margin for better alignment */
+    }
+
+    
+    .subtotal-badge {
+      display: none; /* Hide price badge, subtotal badge, and remove icon on mobile */
     }
   }
+  }
+
+
 </style>

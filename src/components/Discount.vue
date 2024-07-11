@@ -1,19 +1,12 @@
 <template>
   <div class="mb-3">
-    <label for="discountCode" class="discount-text form-label">Discount Code</label>
+    <label for="discountCode" :class="['discount-text', data.isDarkMode ? 'discount-text-black' : '']">Discount Code</label>
     <div class="input-group">
-      <input type="text" class="form-control" id="discountCode" v-model="discountCode">
-      <button class="btn btn-outline-primary" type="button" @click="applyDiscount">Apply</button>
+      <input type="text" :class="['form-control', data.isDarkMode ? 'custom-input-black' : '']" id="discountCode" v-model="discountCode">
+      <button :class="['btn btn-outline-primary', data.isDarkMode ? 'btn-black' : '']" type="button" @click="applyDiscount">Apply</button>
     </div>
-    
   </div>
 </template>
-<style>
-.discount-text{
-  color: black;
-}
-
-</style>
 
 <script setup>
   import { ref } from 'vue';
@@ -46,9 +39,13 @@
   };
 </script>
 
-<style>
-.text-discount-black {
-  color: white;
+<style scoped>
+.discount-text {
+  color: black; /* Default color for light theme */
+}
+
+.discount-text-black {
+  color: white; /* Color for dark theme */
 }
 
 .custom-input-black {
@@ -56,8 +53,6 @@
   color: white !important;
   border: 1px solid #707070 !important;
 }
-
-
 
 .custom-input-black::placeholder {
   color: #bbb;
@@ -72,6 +67,4 @@
   color: white !important;
   background-color: #BB86FC !important; /* Adjusted for AA-level contrast */
 }
-
-
 </style>
