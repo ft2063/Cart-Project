@@ -47,11 +47,11 @@
 </script>
 
 <style>
-.text-discount {
+.text-discount-black {
   color: white;
 }
 
-.custom-input {
+.custom-input-black {
   background-color: #383838 !important;
   color: white !important;
   border: 1px solid #707070 !important;
@@ -59,16 +59,16 @@
 
 
 
-.custom-input::placeholder {
+.custom-input-black::placeholder {
   color: #bbb;
 }
 
-.btn {
+.btn-black {
   color: #BB86FC !important; /* Primary color */
   border: 1px solid #BB86FC !important;
 }
 
-.btn:hover {
+.btn-black:hover {
   color: white !important;
   background-color: #BB86FC !important; /* Adjusted for AA-level contrast */
 }
