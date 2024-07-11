@@ -175,4 +175,128 @@
       margin-bottom: 5px; /* Adjust spacing as needed */
     }
   }
+
+
+
+
+  .card-black{
+    background-color: #383838;
+    color: white;
+  }
+
+  .cart-item-black {
+    display: flex;
+    align-items: center;
+    border: 1px solid #707070;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #383838;
+    color: white;
+  }
+
+  .cart-item-black:hover {
+    border-color: #d0d0d0;
+    transform: scale(1.007);
+    background-color: #484848 !important; /* Slightly brighter color on hover */
+  }
+
+  .cart-item-black:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #d0d0d0; /* Lighter gray border for focus state */
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); /* White border for focus state */
+}
+
+  .cart-item-left-black {
+    flex: 0 0 60px; /* Fixed width for image */
+  }
+
+  .cart-item-right-black {
+    flex-grow: 1;
+    margin-left: 15px; /* Space between image and details */
+  }
+
+  .cart-item-image-black {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .card-title-black {
+    margin-bottom: 0.5rem;
+  }
+
+  .item-name-black {
+    width: 30%; /* Fixed width for item name */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+
+  .quantity-controls-black {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+
+  .quantity-controls-black i {
+    cursor: pointer;
+    margin: 0 5px;
+  }
+
+  .price-badge-black {
+    background-color: #BB86FC; /* Purple color for price badge */
+    color: #383838; /* Text color on price badge */
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+
+  .subtotal-badge-black {
+    color: #BB86FC; /* Purple color for subtotal */
+  }
+
+  .remove-icon-black {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 10px; /* Adjust spacing as needed */
+  }
+
+  .empty-cart-card-black {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .empty-cart-card-black img {
+    max-width: 200px;
+    margin-top: 20px;
+  }
+
+  .total-text-black{
+    color: #BB86FC
+  }
+
+  /* Adjustments for mobile */
+  @media (max-width: 768px) {
+    .cart-item-black {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cart-item-image-black {
+      margin-bottom: 10px;
+    }
+
+    .cart-item-right-black {
+      margin-left: 0;
+      margin-top: 10px; /* Space between details and controls */
+    }
+
+    .item-name-black {
+      width: 100%; /* Full width for item name on mobile */
+      margin-bottom: 5px; /* Adjust spacing as needed */
+    }
+  }
 </style>
