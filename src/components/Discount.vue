@@ -1,11 +1,10 @@
 <template>
   <div class="mb-3">
-    <label for="discountCode" class="form-label">Discount Code</label>
+    <label for="discountCode" class="form-label text-discount">Discount Code</label>
     <div class="input-group">
-      <input type="text" class="form-control" id="discountCode" v-model="discountCode">
-      <button class="btn btn-outline-primary" type="button" @click="applyDiscount">Apply</button>
+      <input type="text" class="form-control custom-input" id="discountCode" v-model="discountCode">
+      <button class="btn" type="button" @click="applyDiscount">Apply</button>
     </div>
-    
   </div>
 </template>
 
@@ -39,3 +38,31 @@
     }
   };
 </script>
+
+<style scoped>
+.text-discount {
+  color: white;
+}
+
+.custom-input {
+  background-color: #383838 !important;
+  color: white !important;
+  border: 1px solid #707070 !important;
+}
+
+
+
+.custom-input::placeholder {
+  color: #bbb;
+}
+
+.btn {
+  color: #BB86FC !important; /* Primary color */
+  border: 1px solid #BB86FC !important;
+}
+
+.btn:hover {
+  color: white !important;
+  background-color: #BB86FC !important; /* Adjusted for AA-level contrast */
+}
+</style>

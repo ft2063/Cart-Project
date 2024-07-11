@@ -2,56 +2,37 @@
   <div class="row my-4">
     <div v-if="data.cartItems.length > 0" class="col-md-12">
       <div class="card">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <!-- Price column only visible on tablets and larger -->
-                <th class="d-none d-md-table-cell">Price</th>
-                <!-- Subtotal column only visible on tablets and larger -->
-                <th class="d-none d-md-table-cell">Subtotal</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="item in data.cartItems" :key="item.id">
-                <td>{{ item.id }}</td>
-                <td>
-                  <img :src="item.image" width="60" height="60" alt="" class="img-fluid rounded">
-                </td>
-                <td>{{ item.name }}</td>
-                <td class="quantity-cell">
-                  <i class="bi bi-caret-up" @click="data.incrementQ(item)"></i>
-                  {{ item.quantity }}
-                  <i class="bi bi-caret-down" @click="data.decrementQ(item)"></i>
-                </td>
-                <!-- Price column only visible on tablets and larger -->
-                <td class="d-none d-md-table-cell">{{ item.price }}</td>
-                <!-- Subtotal column only visible on tablets and larger -->
-                <td class="d-none d-md-table-cell">{{ item.subtotal }}</td>
-                <td>
-                  <i @click="data.removeFromCart(item)" class="bi bi-cart-x text-danger fw-bo"></i>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="7" class="text-end">
-                  <discount></discount>
-                </td>
-              </tr>
-              <tr>
-                <th class="text-center" colspan="3">Total</th>
-                <td class="text-center" colspan="3">
-                  <span class="badge bg-danger rounded-pill">
-                    ${{ data.total }}
+        <div class="card-body">
+          <div v-for="item in data.cartItems" :key="item.id" class="cart-item mb-3">
+            <div class="cart-item-left">
+              <img :src="item.image" width="60" height="60" alt="" class="img-fluid rounded cart-item-image">
+            </div>
+            <div class="cart-item-right w-100">
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="item-name">
+                  <h5 class="card-title mb-0">{{ item.name }}</h5>
+                </div>
+                <div class="d-flex align-items-center ml-auto">
+                  <span class="quantity-controls me-3">
+                    <i class="bi bi-caret-up" @click="data.incrementQ(item)"></i>
+                    <span class="quantity">{{ item.quantity }}</span>
+                    <i class="bi bi-caret-down" @click="data.decrementQ(item)"></i>
                   </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <span class="badge bg-danger rounded-pill price-badge me-3">
+                    ${{ item.price }}
+                  </span>
+                  <span class="subtotal-badge me-3">
+                    Subtotal: ${{ item.subtotal }}
+                  </span>
+                  <i @click="data.removeFromCart(item)" class="bi bi-cart-x text-danger fw-bold remove-icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="data.cartItems.length > 0" class="text-end total-text mt-4">
+            <discount></discount>
+            <h5>Total: ${{ data.total }}</h5>
+          </div>
         </div>
       </div>
     </div>
@@ -66,6 +47,7 @@
   </div>
 </template>
 
+
 <script setup>
   import { useCartStore } from '../stores/useCartStore';
   import Discount from './Discount.vue';
@@ -74,8 +56,87 @@
 </script>
 
 <style scoped>
-  i {
+  .card {
+    background-color: #383838;
+    color: white;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #707070;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #383838;
+    color: white;
+  }
+
+  .cart-item:hover {
+    border-color: #d0d0d0;
+    transform: scale(1.007);
+    background-color: #484848 !important; /* Slightly brighter color on hover */
+  }
+
+  .cart-item:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #d0d0d0; /* Lighter gray border for focus state */
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); /* White border for focus state */
+}
+
+  .cart-item-left {
+    flex: 0 0 60px; /* Fixed width for image */
+  }
+
+  .cart-item-right {
+    flex-grow: 1;
+    margin-left: 15px; /* Space between image and details */
+  }
+
+  .cart-item-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .card-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .item-name {
+    width: 30%; /* Fixed width for item name */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+
+  .quantity-controls i {
     cursor: pointer;
+    margin: 0 5px;
+  }
+
+  .price-badge {
+    background-color: #BB86FC; /* Purple color for price badge */
+    color: #383838; /* Text color on price badge */
+    margin-right: 10px; /* Adjust spacing as needed */
+  }
+
+  .subtotal-badge {
+    color: #BB86FC; /* Purple color for subtotal */
+  }
+
+  .remove-icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+    margin-left: 10px; /* Adjust spacing as needed */
   }
 
   .empty-cart-card {
@@ -90,21 +151,29 @@
     margin-top: 20px;
   }
 
+  .total-text{
+    color: #BB86FC
+  }
+
   /* Adjustments for mobile */
   @media (max-width: 768px) {
-    .table-responsive {
-      overflow-x: auto;
+    .cart-item {
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .quantity-cell {
-      font-size: 0.9rem;
+
+    .cart-item-image {
+      margin-bottom: 10px;
     }
-    .img-fluid {
-      max-width: 40px;
-      max-height: 40px;
+
+    .cart-item-right {
+      margin-left: 0;
+      margin-top: 10px; /* Space between details and controls */
     }
-    /* Hide Price and Subtotal columns on mobile */
-    .d-md-table-cell {
-      display: none;
+
+    .item-name {
+      width: 100%; /* Full width for item name on mobile */
+      margin-bottom: 5px; /* Adjust spacing as needed */
     }
   }
 </style>

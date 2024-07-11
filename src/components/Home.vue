@@ -15,5 +15,8 @@
 </script>
 
 <style>
-
+body {
+    background-color: black;
+    color: white; /* Optional: to ensure text is visible */
+}
 </style>
