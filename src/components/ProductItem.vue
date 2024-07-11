@@ -36,8 +36,9 @@
 
 <style>
 .custom-card {
-    border-radius: 15px;
+    
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
     transition: transform 0.2s;
 }
 .custom-card:hover {

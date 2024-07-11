@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3">
-    <label for="discountCode" class="form-label">Discount Code</label>
+    <label for="discountCode" class="discount-text form-label">Discount Code</label>
     <div class="input-group">
       <input type="text" class="form-control" id="discountCode" v-model="discountCode">
       <button class="btn btn-outline-primary" type="button" @click="applyDiscount">Apply</button>
@@ -8,6 +8,12 @@
     
   </div>
 </template>
+<style>
+.discount-text{
+  color: black;
+}
+
+</style>
 
 <script setup>
   import { ref } from 'vue';
@@ -39,3 +45,5 @@
     }
   };
 </script>
+
+
