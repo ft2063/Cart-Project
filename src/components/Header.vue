@@ -25,5 +25,25 @@
 </script>
 
 <style>
+.custom-navba-black {
+    background-color: #383838;
+}
+
+.nav-link-black {
+    color: white; /* Ensure the links are visible against the dark background */
+}
+
+.navbar-brand-black, .navbar-toggler-icon-black {
+    color: white; /* Ensure the brand and toggler icon are visible */
+}
+
+/* Optional: Style the navbar-toggler button */
+.navbar-toggler-black {
+    border-color: white;
+}
+
+.navbar-toggler-black:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 </style>
