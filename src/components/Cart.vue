@@ -143,6 +143,18 @@
     background-color: #f8fafc;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
+  .empty-cart-card:hover {
+    
+    transform: scale(1.007);
+    
+  }
+
+  .empty-cart-card:focus {
+    border-radius: 8px;
+    outline: none; /* Remove default focus outline */
+    border-color: #d0d0d0; /* Lighter gray border for focus state */
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3); /* White border for focus state */
+}
 
   .empty-cart-card img {
     max-width: 200px;
@@ -265,17 +277,27 @@
   .empty-cart-card-black {
     border: 1px solid #e2e8f0;
     border-radius: 8px;
-    background-color: #f8fafc;
+    background-color: #383838;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: white;
+
+  }
+  .empty-cart-card-black:hover {
+    border-color: #d0d0d0;
+    transform: scale(1.007);
+    background-color: #484848 !important; /* Slightly brighter color on hover */
   }
 
   .empty-cart-card-black img {
     max-width: 200px;
     margin-top: 20px;
   }
+  .empty-cart-card-black a {
+    color: #BB86FC;
+  }
 
   .total-text-black{
-    color: #BB86FC
+    color: #BB86FC;
   }
 
   /* Adjustments for mobile */
