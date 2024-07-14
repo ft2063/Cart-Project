@@ -1,4 +1,5 @@
-<template>
+<template> 
+ <!-- product card component for a shopping cart. The card displays the product's image, name, price, and a button to add the product to the cart -->
   <div class="col-md-6 col-lg-3 mb-3"> <!-- Adjusted column width and margin -->
     <div :class="['card', 'text-center', data.isDarkMode ? 'custom-card-black' : 'custom-card']">
       <img :src="product.image" class="card-img-top custom-img" alt="" srcset="">

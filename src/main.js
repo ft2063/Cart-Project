@@ -10,7 +10,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 
 createApp(App)
-    .use(createPinia())
+    .use(createPinia())  // Use Pinia for state management.
     .use(Toast)
-    .use(router)
-    .mount('#app')
+    .use(router)    // Use Vue Router for handling routes.
+    .mount('#app') // Mount the Vue application to the HTML element

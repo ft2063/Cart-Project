@@ -1,4 +1,5 @@
 // stores/useCartStore.js
+// store using Pinia for managing a shopping cart in a Vue.js application. It includes functionality for adding, updating, and removing items from the cart
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import { useToast } from "vue-toastification";
@@ -16,13 +17,13 @@ export const useCartStore = defineStore('cart', {
     countCartItems(state) {
       return state.cartItems.length;
     },
-    subtotal(state) {
+    subtotal(state) { //gets subtotal for each item in cart 
       return (itemId) => {
         const item = state.cartItems.find(product => product.id === itemId);
         return item ? item.price * item.quantity : 0;
       };
     },
-    total(state) {
+    total(state) { //gets total price of cart
       return state.cartItems.reduce((acc, item) => acc + item.subtotal, 0);
     }
   },
@@ -47,6 +48,7 @@ export const useCartStore = defineStore('cart', {
         });
       }
     },
+    //increments quantity of item in cart
     incrementQ(item) {
       let index = this.cartItems.findIndex(product => product.id === item.id);
       if (index !== -1) {
@@ -57,6 +59,7 @@ export const useCartStore = defineStore('cart', {
         });
       }
     },
+    //decrements quantity of item in cart
     decrementQ(item) {
       let index = this.cartItems.findIndex(product => product.id === item.id);
       if (index !== -1) {
@@ -71,12 +74,14 @@ export const useCartStore = defineStore('cart', {
         });
       }
     },
+      //removes quantity of item in cart
     removeFromCart(item) {
       this.cartItems = this.cartItems.filter(product => product.id !== item.id);
       toast.success("Item was removed", {
         timeout: 2000
       });
     },
+    //recalculates total amount to be paid upon discount
     applyDiscount(discountPercentage) {
       const discountFactor = 1 - discountPercentage / 100;
       this.cartItems.forEach(item => {
@@ -84,6 +89,7 @@ export const useCartStore = defineStore('cart', {
         console.log(item.subtotal);
       });
     },
+    //changes theme from dark to white
     toggleTheme() {
       this.isDarkMode = !this.isDarkMode;
     }

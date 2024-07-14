@@ -1,4 +1,5 @@
 <template>
+<!-- main application layout, has a Header component and a container for the routed views -->
   <div :class="['app-container', data.isDarkMode ? 'app-container-black' : '']">
     <Header />
     <div class="container">

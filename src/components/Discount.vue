@@ -1,4 +1,5 @@
 <template>
+<!-- This Vue component is a form for applying discount codes in a shopping cart. It includes a text input for the discount code and a button to apply the discount -->
   <div class="mb-3">
     <label for="discountCode" :class="['discount-text', data.isDarkMode ? 'discount-text-black' : '']">Discount Code</label>
     <div class="input-group">

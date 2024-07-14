@@ -1,4 +1,5 @@
 <template>
+<!-- shopping cart component that adapts to both dark mode and light mode -->
   <div class="row my-4">
     <div v-if="data.cartItems.length > 0" class="col-md-12">
       <div :class="['card', data.isDarkMode ? 'card-black' : '']">
